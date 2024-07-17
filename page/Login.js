@@ -19,18 +19,12 @@ const LoginScreen = ({ navigation }) => {
         style={styles.background}
       />
       <Image
-          source={require('../assets/icon.png')}
+          source={require('../assets/logo.png')}
           style={styles.logo}
           resizeMode="contain"
         />
       <View style={styles.innerContainer}>
         <Text style={styles.title}>Login</Text>
-        <TextInput
-          style={styles.input}
-          value={username}
-          onChangeText={setUsername}
-          placeholder="Username"
-        />
         <TextInput
           style={styles.input}
           value={password}
@@ -85,6 +79,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 20,
     paddingHorizontal: 10,
+    textAlign:'center'
   },
   loginButton: {
     width: '100%',
@@ -98,9 +93,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#ffffff', // Button text color
   },logo: {
-    width: 150,
-    height: 150,
-    marginBottom: 40,
+    width: 200,
+    height: 200,
+    marginBottom: 10,
   },
 });
 

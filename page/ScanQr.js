@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Modal, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Modal } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { useRoute } from '@react-navigation/native';
-import { Card, Button, Paragraph, Title, IconButton } from 'react-native-paper';
+import { useRoute, useNavigation } from '@react-navigation/native';
+import { Card, Button, Paragraph, Title } from 'react-native-paper';
 
-const ScanQRScreen = () => {
+const ScanQRScreen = ({ origin }) => {
   const route = useRoute();
-  const origin = route.params?.origin ?? 'Unknown';
+  const navigation = useNavigation();
+  const originParam = route.params?.origin ?? origin;
 
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
@@ -28,9 +29,13 @@ const ScanQRScreen = () => {
     setModalVisible(true);
   };
 
-  const handleYesPress = () => {
+  const handleYesPress = async () => {
     setScanned(false);
     setModalVisible(false);
+    console.log(data, originParam);
+    const response = await fetch(`https://eb78-36-71-165-7.ngrok-free.app/absensi/api/api.php?id=${data}&type=${originParam}`);
+    const result = await response.json();
+    console.log(result);
   };
 
   const handleNoPress = () => {
@@ -50,7 +55,7 @@ const ScanQRScreen = () => {
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
       />
-      <Text style={styles.text}>Barcode untuk {origin}</Text>
+      <Text style={styles.text}>Barcode untuk {originParam}</Text>
 
       <Modal
         animationType="slide"
@@ -117,3 +122,4 @@ const styles = StyleSheet.create({
 });
 
 export default ScanQRScreen;
+

@@ -1,39 +1,24 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+      <LinearGradient
+        colors={['#1abc9c', '#16a085']}
+        style={styles.header}
+      >
         <Text style={styles.headerText}>E-Kaghe</Text>
-        <Text style={styles.text}>Selamat datang di aplikasi kami!</Text>
-      </View>
+        <Text style={styles.subHeaderText}>Selamat datang di aplikasi kami!</Text>
+      </LinearGradient>
       <View style={styles.content}>
-       
-       
         <Image
-          source={require('../assets/icon.png')}
+          source={require('../assets/logo.png')}
           style={styles.logo}
           resizeMode="contain"
         />
-         <TouchableOpacity
-          style={styles.logoutButton}
-          onPress={() => navigation.navigate('ScanQr', { origin: 'Sorogan' })}
-        >
-          <Text style={styles.buttonText}>Sorogan</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.logoutButton}
-          onPress={() => navigation.navigate('ScanQr', { origin: 'Madrasah AL-Qura`an' })}
-        >
-          <Text style={styles.buttonText}>Madrasah AL Qur'an</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.logoutButton}
-          onPress={() => navigation.navigate('ScanQr', { origin: 'Lalaran' })}
-        >
-          <Text style={styles.buttonText}>Lalaran</Text>
-        </TouchableOpacity>
+        <Text style={styles.welcomeMessage}>Nikmati kemudahan dalam mengelola berbagai hal dengan aplikasi kami. Selamat menggunakan!</Text>
       </View>
     </View>
   );
@@ -42,48 +27,44 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f5f5f5',
   },
   header: {
-    height: 200, // Tinggi header bisa disesuaikan sesuai kebutuhan
-    backgroundColor: '#1abc9c', // Warna latar belakang header
-    borderBottomLeftRadius: 40, // Setengah lingkaran pada kiri bawah
-    borderBottomRightRadius: 40, // Setengah lingkaran pada kanan bawah
-    justifyContent: 'center', // Ubah ke justifyContent: 'flex-end' untuk mengarah ke bawah, atau 'flex-start' untuk mengarah ke atas
+    height: 200,
+    justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 10,
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 40,
+    padding: 20,
   },
   headerText: {
-    fontSize: 24,
+    fontSize: 30,
     fontWeight: 'bold',
-    color: '#ffffff', // Warna teks header
+    color: '#ffffff',
+  },
+  subHeaderText: {
+    fontSize: 18,
+    color: '#ffffff',
+    marginTop: 10,
   },
   content: {
     flex: 1,
-    justifyContent: 'flex-start', // Ubah ke justifyContent: 'flex-start' untuk mengarah ke atas
+    justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
-  },
-  text: {
-    fontSize: 20,
-    marginBottom: 20,
-    color:'#ffffff'
+    paddingHorizontal: 20,
   },
   logo: {
-    width: 150,
-    height: 150,
-    marginBottom: 20,
-  },
-  logoutButton: {
-    backgroundColor: '#e74c3c', // Warna latar belakang tombol
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 10,
+    width: 250,
+    height: 250,
     marginBottom: 10,
   },
-  buttonText: {
+  welcomeMessage: {
     fontSize: 18,
-    color: '#ffffff', // Warna teks tombol
+    color: '#333333',
+    textAlign: 'center',
+    marginVertical: 20,
+    paddingHorizontal: 20,
+    lineHeight: 24,
   },
 });
 

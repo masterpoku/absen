@@ -17,7 +17,7 @@ const Splash = ({ navigation }) => {
       style={styles.container}
     >
         <Image
-          source={require('../assets/icon.png')}
+          source={require('../assets/logo.png')}
           style={styles.logo}
           resizeMode="contain"
         />
@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
     color: '#ffffff', // White text color
   },
   logo: {
-    width: 150,
-    height: 150,
+    width: 250,
+    height: 250,
     marginBottom: 20,
   },
 });
