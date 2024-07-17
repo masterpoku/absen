@@ -1,28 +1,36 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableHighlight,Image } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableHighlight, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 const LoginScreen = ({ navigation }) => {
-  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // Implement your login logic here
-    // Example: validate credentials, navigate to HomeScreen on success
-    navigation.navigate('Home');
+    const url = `https://eb78-36-71-165-7.ngrok-free.app/absensi/api/api.php?id=${password}&type=login`;
+
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === 'sukses') { // Periksa respons 'sukses'
+          navigation.navigate('Home');
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
     <View style={styles.container}>
-      <LinearGradient
-         colors={['#1abc9c', '#16a085', '#138d75']}
-        style={styles.background}
-      />
-      <Image
-          source={require('../assets/logo.png')}
-          style={styles.logo}
-          resizeMode="contain"
-        />
+      <LinearGradient colors={['#1abc9c', '#16a085', '#138d75']} style={styles.background} />
+      <Image source={require('../assets/logo.png')} style={styles.logo} resizeMode="contain" />
       <View style={styles.innerContainer}>
         <Text style={styles.title}>Login</Text>
         <TextInput
@@ -34,7 +42,7 @@ const LoginScreen = ({ navigation }) => {
         />
         <TouchableHighlight
           style={styles.loginButton}
-          underlayColor="#193441" // Highlight color when pressed
+          underlayColor="#193441"
           onPress={handleLogin}
         >
           <Text style={styles.buttonText}>Login</Text>
@@ -79,20 +87,20 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 20,
     paddingHorizontal: 10,
-    textAlign:'center'
   },
   loginButton: {
     width: '100%',
     height: 40,
-    backgroundColor: '#1abc9c', // Button background color
+    backgroundColor: '#1abc9c',
     borderRadius: 8,
-    justifyContent: 'center', // Center align text vertically
-    alignItems: 'center', // Center align text horizontally
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonText: {
     fontSize: 18,
-    color: '#ffffff', // Button text color
-  },logo: {
+    color: '#ffffff',
+  },
+  logo: {
     width: 200,
     height: 200,
     marginBottom: 10,
